@@ -7,8 +7,9 @@ use CodeIgniter\HTTP\ResponseInterface;
 
 class ShowReportController extends BaseController
 {
-    public function index()
+    public function index($reportId)
     {
-        die('aqui');
+        $report = model('Report')->find($reportId);
+        return $this->render('show', ['report' => $report]);
     }
 }
