@@ -57,7 +57,7 @@ abstract class BaseController extends Controller
         // E.g.: $this->session = service('session');
     }
 
-    public function render(string $page, array $data)
+    public function render(string $page, array $data = [])
     {
         if (! is_file(APPPATH . 'Views/' . $page . '.php')) {
             // Whoops, we don't have a page for that!
