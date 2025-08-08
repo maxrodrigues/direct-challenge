@@ -2,6 +2,8 @@
 
 Desenvolva um módulo simples para criação, edição e gestão de laudos médicos:
 
+#### Para instalar o projeto, basta seguir as instruções que estão [aqui](https://github.com/maxrodrigues/direct-challenge/blob/main/Instructions.md)
+
 ## 📝 Formulário de Laudo
 #### Editor de texto (ex: TinyMCE) com suporte a:
 - Modelos de frases e laudos reutilizáveis;
