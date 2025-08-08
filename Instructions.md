@@ -2,12 +2,12 @@
 
 Clone o Repositório
 ```sh
-git clone https://github.com/maxrodrigues/api_liberfly
+git clone https://github.com/maxrodrigues/direct-challenge
 ```
 
 Acesse a pasta do projeto
 ```sh
-cd api_liberfly/
+cd direct-challenge/
 ```
 
 Suba os containers do projeto
@@ -17,13 +17,10 @@ docker-compose up -d
 
 Acessar o container
 ```sh
-docker-compose exec app bash
+docker-compose exec app php spark migrate
 ```
 
-Instalar as dependências do projeto
-```sh
-composer install
-```
+
 
 Acessar o projeto
 [http://localhost:8000](http://localhost:8000)
