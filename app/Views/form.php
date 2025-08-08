@@ -54,16 +54,13 @@
                 dataType: 'text',
                 data: $('#save-report').serialize(),
                 success: function(data){
-                    $('#save-report').trigger('reset'),
+                    $('#save-report').trigger('reset')
                     $('#toast').addClass('text-bg-success')
                     $('#toast-body').text(data.toString())
                     toast.show()
                 },
                 error: function(data, textStatus, errorMessage){
                     let errors = JSON.parse(data.responseText);
-
-                    // console.log(errors.messages)
-
                     $('#toast').addClass('text-bg-danger')
                     $('#toast-body').html(errors.messages.error)
                     toast.show();
