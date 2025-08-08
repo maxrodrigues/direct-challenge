@@ -1,5 +1,13 @@
-<!--<form method="post" action="/save-medial-report" >-->
-<?php echo form_open('save-medical-report'); ?>
+<div class="row mt-3 pt-3 pb-3">
+    <div class="col-2">
+        <a href="<?=url_to('home')?>" class="btn btn-primary w-100">
+            <i class="bi bi-arrow-left me-1"></i>
+            Voltar
+        </a>
+    </div>
+</div>
+
+<form method="post" action="<?=url_to('save-report')?>" id="save-report">
     <div class="row mb-3">
         <div class="col-md-4">
             <label for="patient">Paciente</label>
@@ -16,16 +24,52 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <button type="submit" class="btn btn-primary" id="submit">Enviar</button>
+            <button type="button" class="btn btn-primary" id="submit">Enviar</button>
             <button type="reset" class="btn btn-secondary">Cancelar</button>
         </div>
     </div>
-<?php echo form_close(); ?>
-<!--</form>-->
-<!--<script>-->
-<!--    $(function() {-->
-<!--        $('#submit').click(function (){-->
-<!--            $('#loader').removeClass('d-none');-->
-<!--        })-->
-<!--    })-->
-<!--</script>-->
+</form>
+
+<div class="toast align-items-center border-0 position-absolute button-0 end-0"
+     role="alert"
+     aria-live="assertive"
+     aria-atomic="true" id="toast">
+    <div class="d-flex">
+        <div class="toast-body" id="toast-body">
+            Hello, world! This is a toast message.
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+</div>
+
+<script>
+    $(function() {
+        $('#submit').click(function (event){
+            event.preventDefault();
+            let toast = bootstrap.Toast.getOrCreateInstance(document.getElementById('toast'))
+            // $('#loader').removeClass('d-none');
+            $.ajax({
+                url: '<?=url_to('save-report')?>',
+                type: 'POST',
+                dataType: 'text',
+                data: $('#save-report').serialize(),
+                success: function(data){
+                    $('#save-report').trigger('reset'),
+                    $('#toast').addClass('text-bg-success')
+                    $('#toast-body').text(data.toString())
+                    toast.show()
+                },
+                error: function(data, textStatus, errorMessage){
+                    let errors = JSON.parse(data.responseText);
+
+                    // console.log(errors.messages)
+
+                    $('#toast').addClass('text-bg-danger')
+                    $('#toast-body').html(errors.messages.error)
+                    toast.show();
+                },
+            })
+
+        })
+    })
+</script>
