@@ -1,4 +1,4 @@
-<form method="post" action="<?= url_to('update-report', $report['id']) ?>">
+<form method="post" action="<?= url_to('update-report', $report['id']) ?>" id="update-report">
 <div class="row mb-3">
     <div class="col-md-4">
         <label for="patient">Paciente</label>
@@ -16,7 +16,9 @@
 <div class="row mb-3">
     <div class="col-md-12">
         <div id="editor-container">
-            <div class="editor-container__editor"><div id="editor"></div></div>
+            <div class="editor-container__editor">
+                <textarea name="reportText" id="editor"></textarea>
+            </div>
         </div>
     </div>
 </div>
@@ -44,8 +46,37 @@
 </div>
 <div class="row">
     <div class="col-md-12">
-        <button type="submit" class="btn btn-primary" id="submit">Enviar</button>
+        <button type="button" class="btn btn-primary" id="submit">Enviar</button>
         <button type="reset" class="btn btn-secondary">Cancelar</button>
     </div>
 </div>
 </form>
+
+<script>
+    $(function () {
+        let editor;
+
+        ClassicEditor.create(document.querySelector('#editor'), editorConfig)
+            .then(newEditor => {
+                editor = newEditor;
+            });
+
+        $('#submit').click(function () {
+            console.log(editor.getData());
+            document.getElementById('editor').value = editor.getData().toString();
+            $.ajax({
+                url: '<?= url_to('update-report', $report['id']) ?>',
+                type: 'POST',
+                dataType: 'json',
+                data: $('#update-report').serialize(),
+                success: function (response) {
+
+                },
+                error: function (errorResponse) {
+                    console.log(errorResponse.responseText);
+                },
+
+            })
+        })
+    })
+</script>

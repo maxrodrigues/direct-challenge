@@ -26,5 +26,3 @@ const editorConfig = {
     licenseKey: LICENSE_KEY,
     placeholder: 'Type or paste your content here!'
 };
-
-ClassicEditor.create(document.querySelector('#editor'), editorConfig);
